@@ -1,5 +1,6 @@
 node_modules/
 .DS_Store
 *.webm
+!public/exports/pythagorean-theorem-fallback.webm
 *.log
 dist/
