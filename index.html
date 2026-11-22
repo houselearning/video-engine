@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HouseLearning Video Engine</title>
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">HouseLearning educational animation</p>
+        <h1 id="video-title">Pythagorean Theorem</h1>
+      </div>
+      <button id="theme-toggle" class="icon-button" type="button" aria-label="Toggle light theme" title="Toggle theme">Theme</button>
+    </header>
+
+    <section class="stage-layout">
+      <div class="video-column">
+        <div id="video-shell" class="video-shell">
+          <canvas id="video-canvas" width="1280" height="720" aria-label="Animated Pythagorean theorem lesson"></canvas>
+          <div id="subtitle" class="subtitle" aria-live="polite"></div>
+          <button id="center-play" class="center-play" type="button" aria-label="Play video">Play</button>
+        </div>
+
+        <div class="transport" aria-label="Video controls">
+          <button id="play-button" class="icon-button" type="button" aria-label="Play">Play</button>
+          <span id="current-time" class="time">0:00</span>
+          <input id="progress" class="progress" type="range" min="0" max="1000" value="0" aria-label="Video progress">
+          <span id="duration" class="time">0:00</span>
+          <button id="mute-button" class="icon-button" type="button" aria-label="Mute overall audio">Mute</button>
+          <button id="fullscreen-button" class="icon-button" type="button" aria-label="Enter fullscreen">Fullscreen</button>
+          <button id="download-button" class="icon-button" type="button" aria-label="Download video">Download</button>
+        </div>
+      </div>
+
+      <aside class="mixer" aria-label="Volume mixer">
+        <div class="mixer-heading">
+          <h2>Volume mixer</h2>
+          <button id="mixer-reset" type="button">Reset</button>
+        </div>
+        <label>Narration <input id="narration-volume" type="range" min="0" max="1" step="0.01" value="0.9"></label>
+        <label>Music <input id="music-volume" type="range" min="0" max="1" step="0.01" value="0.18"></label>
+        <label>Effects <input id="effects-volume" type="range" min="0" max="1" step="0.01" value="0.55"></label>
+        <label>Overall <input id="overall-volume" type="range" min="0" max="1" step="0.01" value="0.8"></label>
+      </aside>
+    </section>
+
+    <div id="context-menu" class="context-menu" role="menu" hidden>
+      <button id="menu-download" type="button" role="menuitem">Download Video</button>
+      <button id="menu-play" type="button" role="menuitem">Pause / Resume</button>
+    </div>
+  </main>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "houselearning-video-engine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 4175",
+    "test": "node --test tests/*.test.mjs"
+  }
+}
