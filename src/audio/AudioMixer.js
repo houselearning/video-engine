@@ -8,6 +8,7 @@ export class AudioMixer {
     const Context = window.AudioContext || window.webkitAudioContext;
     if (!Context) return false;
     this.context = new Context();
+    if (this.context.state === 'suspended') await this.context.resume();
     this.mediaDestination = typeof this.context.createMediaStreamDestination==='function' ? this.context.createMediaStreamDestination() : null;
     this.master = this.context.createGain();
     this.channels.overall = this.master;
@@ -17,6 +18,17 @@ export class AudioMixer {
     this.channels.narration.connect(this.master); this.channels.music.connect(this.master); this.channels.effects.connect(this.master); this.master.connect(this.context.destination); if(this.mediaDestination)this.master.connect(this.mediaDestination);
     this.setVolume('overall',0.8); this.setVolume('narration',0.9); this.setVolume('music',0.18); this.setVolume('effects',0.55);
     return true;
+  }
+  async loadAndScheduleMusic(path) {
+    if (!await this.init()) return false;
+    if (!this.musicBuffer) { const response=await fetch(path); if(!response.ok)return false; this.musicBuffer=await this.context.decodeAudioData(await response.arrayBuffer()); }
+    this.musicSource?.stop?.();
+    this.musicSource=this.context.createBufferSource(); this.musicSource.buffer=this.musicBuffer; this.musicSource.loop=true; this.musicSource.connect(this.channels.music); this.musicSource.start(); return true;
+  }
+  async scheduleExportNarration(narration, sceneStarts) {
+    if (!await this.init()) return false;
+    if (this.context.state === 'suspended') await this.context.resume();
+    await narration.scheduleFromStart(this,sceneStarts); return true;
   }
   setVolume(channel, value) {
     const gain = channel === 'overall' ? this.master : this.channels[channel];

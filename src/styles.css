@@ -6,6 +6,8 @@ button, input { font:inherit; }
 .app-shell { max-width:1180px; margin:auto; padding:24px; }
 .app-header { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:16px; }
 .app-header h1 { margin:4px 0 0; font-size:clamp(1.45rem,3vw,2.35rem); }
+.demo-picker { display:flex; align-items:center; gap:8px; color:var(--hl-muted); font:700 12px Arial,sans-serif; }
+.demo-picker select { min-height:38px; border:1px solid var(--hl-border); border-radius:6px; background:var(--hl-panel); color:var(--hl-text); padding:6px 30px 6px 8px; }
 .eyebrow { margin:0; color:var(--hl-cyan); text-transform:uppercase; font:700 0.72rem/1.2 Arial, sans-serif; letter-spacing:.12em; }
 .stage-layout { display:grid; grid-template-columns:minmax(0,1fr) 230px; gap:16px; }
 .video-column { min-width:0; }

@@ -18,6 +18,8 @@ export class MediaRecorderExporter {
     recorder.stop(); await stopped;
     const blob=new Blob(chunks,{type:mimeType});
     if(!blob.size)return{ok:false,reason:'The recording contained no video data.'};
-    return{ok:true,blob,url:URL.createObjectURL(blob)};
+    const audioTrackCount=stream.getAudioTracks().length;
+    if(audioTrackCount===0)return{ok:false,reason:'No capturable audio track was available. The recording was discarded to avoid a silent export.'};
+    return{ok:true,blob,url:URL.createObjectURL(blob),audioIncluded:true,audioTrackCount:stream.getAudioTracks().length,videoTrackCount:stream.getVideoTracks().length};
   }
 }
